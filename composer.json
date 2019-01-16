@@ -8,14 +8,13 @@
             "email": "the@phizzl.de"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "php": ">=7.0",
-        "deployee/container": "dev-master",
-        "deployee/plugins": "dev-master",
-        "deployee/application": "dev-master",
-        "deployee/config": "dev-master",
-        "deployee/dependency": "dev-master",
+        "deployee/container": "^1.0",
+        "deployee/plugins": "^1.0",
+        "deployee/application": "^1.0",
+        "deployee/config": "^1.0",
+        "deployee/dependency": "^1.0",
         "deployee/environment": "^1.0",
         "symfony/finder": "^3.4",
         "symfony/event-dispatcher": "^3.4"

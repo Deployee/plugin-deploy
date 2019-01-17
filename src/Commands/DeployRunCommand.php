@@ -233,15 +233,19 @@ class DeployRunCommand extends Command
      */
     private function getExecutableDefinitions(InputInterface $input, OutputInterface $output): \ArrayObject
     {
-        $event = new FindExecutableDefinitionFilesEvent($this->deployDefinitionFileFinder->find(), $input, $output);
-
         /* @var ClassLoader $classLoader */
         $classLoader = require('vendor/autoload.php');
-        $definitionFileCollection = $event->getDefinitionFileCollection();
+        $definitionFileCollection = $this->deployDefinitionFileFinder->find();
         $classLoader->addClassMap($definitionFileCollection->getArrayCopy());
+
+        $event = new FindExecutableDefinitionFilesEvent(
+            new \ArrayObject(array_keys($definitionFileCollection->getArrayCopy())),
+            $input,
+            $output
+        );
 
         $this->eventDispatcher->dispatch(FindExecutableDefinitionFilesEvent::class, $event);
 
-        return new \ArrayObject(array_keys($event->getDefinitionFileCollection()->getArrayCopy()));
+        return $event->getDefinitionFileCollection();
     }
 }

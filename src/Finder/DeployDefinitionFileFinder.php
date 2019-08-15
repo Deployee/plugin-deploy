@@ -35,7 +35,7 @@ class DeployDefinitionFileFinder
         $this->finder
             ->files()
             ->name(self::DEPLOY_FILENAME_PATTERN)
-            ->depth("<= 1")
+            ->depth("<= 2")
             ->sort(function(\SplFileInfo $a, \SplFileInfo $b){
                 $sortNameA = substr($a->getBasename(), strpos($a->getBasename(), '_')+1);
                 $sortNameB = substr($b->getBasename(), strpos($b->getBasename(), '_')+1);

@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.3",
         "deployee/container": "^1.0",
         "deployee/plugins": "^1.0",
         "deployee/application": "^1.0",
@@ -20,7 +20,7 @@
         "symfony/event-dispatcher": "^3.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^9.0.0"
     },
     "autoload": {
         "psr-4": {

@@ -10,12 +10,12 @@
     ],
     "require": {
         "php": ">=7.3",
-        "deployee/container": "^1.0",
-        "deployee/plugins": "^1.0",
-        "deployee/application": "^1.0",
-        "deployee/config": "^1.0",
-        "deployee/dependency": "^1.0",
-        "deployee/environment": "^1.0",
+        "deployee/container": "^2.0",
+        "deployee/plugins": "^2.0",
+        "deployee/application": "^2.0",
+        "deployee/config": "^2.0",
+        "deployee/dependency": "^2.0",
+        "deployee/environment": "^2.0",
         "symfony/finder": "^3.4",
         "symfony/event-dispatcher": "^3.4"
     },

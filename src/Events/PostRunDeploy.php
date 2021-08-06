@@ -2,9 +2,9 @@
 
 namespace Deployee\Plugins\Deploy\Events;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class PostRunDeploy extends Event
+class PostRunDeploy extends EventDispatcher
 {
     /**
      * @var bool

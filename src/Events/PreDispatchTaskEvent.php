@@ -4,9 +4,9 @@ namespace Deployee\Plugins\Deploy\Events;
 
 
 use Deployee\Plugins\Deploy\Definitions\Tasks\TaskDefinitionInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class PreDispatchTaskEvent extends Event
+class PreDispatchTaskEvent extends EventDispatcher
 {
     /**
      * @var TaskDefinitionInterface

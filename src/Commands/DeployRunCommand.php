@@ -108,7 +108,7 @@ class DeployRunCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->eventDispatcher->dispatch(PreRunDeployEvent::class, new PreRunDeployEvent($input));
+        $this->eventDispatcher->dispatch(new PreRunDeployEvent($input), PreRunDeployEvent::class);
 
         $definitions = $this->getExecutableDefinitions($input, $output);
         $output->writeln(sprintf('Executing %s definitions', count($definitions)));
@@ -128,7 +128,7 @@ class DeployRunCommand extends Command
             $output->writeln(sprintf('Execute definition %s', $definitionClass), OutputInterface::VERBOSITY_VERBOSE);
             $deployDefinition = $this->deployFactory->createDeploy($definitionClass);
             $event = new PreDispatchDeploymentEvent($deployDefinition);
-            $this->eventDispatcher->dispatch(PreDispatchDeploymentEvent::class, $event);
+            $this->eventDispatcher->dispatch($event, PreDispatchDeploymentEvent::class);
 
             try {
                 if (($exitCode = $this->runDeploymentDefinition($deployDefinition, $output)) !== 0) {
@@ -144,8 +144,8 @@ class DeployRunCommand extends Command
             }
             finally {
                 $this->eventDispatcher->dispatch(
-                    PostDispatchDeploymentEvent::class,
-                    new PostDispatchDeploymentEvent($deployDefinition, $success)
+                    new PostDispatchDeploymentEvent($deployDefinition, $success),
+                    PostDispatchDeploymentEvent::class
                 );
             }
 
@@ -154,7 +154,7 @@ class DeployRunCommand extends Command
             }
         }
 
-        $this->eventDispatcher->dispatch(PostRunDeploy::class, new PostRunDeploy($success));
+        $this->eventDispatcher->dispatch(new PostRunDeploy($success), PostRunDeploy::class);
 
         exit($exitCode);
     }
@@ -196,7 +196,7 @@ class DeployRunCommand extends Command
     private function runTaskDefinition(TaskDefinitionInterface $taskDefinition, OutputInterface $output): DispatchResultInterface{
 
         $event = new PreDispatchTaskEvent($taskDefinition);
-        $this->eventDispatcher->dispatch(PreDispatchTaskEvent::class, $event);
+        $this->eventDispatcher->dispatch($event, PreDispatchTaskEvent::class);
 
         if($event->isPreventDispatch() === true){
             return new DispatchResult(0, 'Skipped execution of task definition', '');
@@ -221,7 +221,7 @@ class DeployRunCommand extends Command
             $output->writeln($result->getOutput(), OutputInterface::VERBOSITY_VERBOSE);
         }
 
-        $this->eventDispatcher->dispatch(PostDispatchTaskEvent::class, new PostDispatchTaskEvent($taskDefinition, $result));
+        $this->eventDispatcher->dispatch(new PostDispatchTaskEvent($taskDefinition, $result), PostDispatchTaskEvent::class);
 
         return $result;
     }
@@ -244,7 +244,7 @@ class DeployRunCommand extends Command
             $output
         );
 
-        $this->eventDispatcher->dispatch(FindExecutableDefinitionFilesEvent::class, $event);
+        $this->eventDispatcher->dispatch($event, FindExecutableDefinitionFilesEvent::class);
 
         return $event->getDefinitionFileCollection();
     }

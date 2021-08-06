@@ -2,11 +2,10 @@
 
 namespace Deployee\Plugins\Deploy\Events;
 
-use Deployee\Components\Container\ContainerInterface;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class PreRunDeployEvent extends Event
+class PreRunDeployEvent extends EventDispatcher
 {
     /**
      * @var InputInterface
@@ -15,7 +14,6 @@ class PreRunDeployEvent extends Event
 
     /**
      * @param InputInterface $input
-     * @param ContainerInterface $container
      */
     public function __construct(InputInterface $input)
     {

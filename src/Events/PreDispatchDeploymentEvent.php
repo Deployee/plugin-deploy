@@ -3,9 +3,9 @@
 namespace Deployee\Plugins\Deploy\Events;
 
 use Deployee\Plugins\Deploy\Definitions\Deploy\DeployDefinitionInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class PreDispatchDeploymentEvent extends Event
+class PreDispatchDeploymentEvent extends EventDispatcher
 {
     /**
      * @var DeployDefinitionInterface
